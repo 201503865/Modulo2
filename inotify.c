@@ -5,6 +5,7 @@
 #include <sys/types.h>
 #include <sys/inotify.h>
 #include <limits.h>
+#include <time.h>
  
 #define MAX_EVENTS 1024 /*Max. number of events to process at one go*/
 #define LEN_NAME 16 /*Assuming that the length of the filename won't exceed 16 bytes*/
@@ -21,11 +22,11 @@ void escribirArchivo(char* parametro, char* parametro2){
     FILE *fptr;
         char there_was_error = 0;
         char opened_in_read  = 1;
-        fptr = fopen("archivo.txt", "rb+");
+        fptr = fopen("/home/n201503865/Monitoreo.txt", "rb+");
         if(fptr == NULL) //if file does not exist, create it
         {
             opened_in_read = 0;
-            fptr = fopen("archivo.txt", "wb");
+            fptr = fopen("/home/n201503865/Monitoreo.txt", "wb");
             if (fptr == NULL)
                 there_was_error = 1;
 
@@ -44,13 +45,13 @@ void escribirArchivo(char* parametro, char* parametro2){
         }else{
             //mandar a escribir
             fclose(fptr);
-            fptr = fopen("archivo.txt", "a");
+            fptr = fopen("/home/n201503865/Monitoreo.txt", "a");
             fprintf(fptr, "%s %s *Fecha: %s \n", parametro, parametro2,fecha);
         }
         fclose(fptr);
 }
 
- 
+
 int main( int argc, char **argv ) 
 {
   int length, i = 0, wd;
@@ -64,15 +65,15 @@ int main( int argc, char **argv )
   }
  
   /* add watch to starting directory */
-  wd = inotify_add_watch(fd, "/home/joe", IN_CREATE | IN_MODIFY | IN_DELETE); 
+  wd = inotify_add_watch(fd, "/home/n201503865/ProyectoSopes", IN_CREATE | IN_MODIFY | IN_DELETE); 
  
   if (wd == -1)
     {
-      printf("Couldn't add watch to %s\n","/home/joe");
+      printf("Couldn't add watch to %s\n","/home/n201503865/ProyectoSopes");
     }
   else
     {
-      printf("Watching:: %s\n","/home/joe");
+      printf("Watching:: %s\n","/home/n201503865/ProyectoSopes");
     }
  
   /* do it forever*/
@@ -133,4 +134,3 @@ int main( int argc, char **argv )
    
   return 0;
 }
-
