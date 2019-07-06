@@ -22,11 +22,11 @@ void escribirArchivo(char* parametro, char* parametro2){
     FILE *fptr;
         char there_was_error = 0;
         char opened_in_read  = 1;
-        fptr = fopen("/home/n201503865/Monitoreo.txt", "rb+");
+        fptr = fopen("/var/proyecto/201503865_files.log", "rb+");
         if(fptr == NULL) //if file does not exist, create it
         {
             opened_in_read = 0;
-            fptr = fopen("/home/n201503865/Monitoreo.txt", "wb");
+            fptr = fopen("/var/proyecto/201503865_files.log", "wb");
             if (fptr == NULL)
                 there_was_error = 1;
 
@@ -45,7 +45,7 @@ void escribirArchivo(char* parametro, char* parametro2){
         }else{
             //mandar a escribir
             fclose(fptr);
-            fptr = fopen("/home/n201503865/Monitoreo.txt", "a");
+            fptr = fopen("/var/proyecto/201503865_files.log", "a");
             fprintf(fptr, "%s %s *Fecha: %s \n", parametro, parametro2,fecha);
         }
         fclose(fptr);
@@ -65,15 +65,15 @@ int main( int argc, char **argv )
   }
  
   /* add watch to starting directory */
-  wd = inotify_add_watch(fd, "/home/n201503865/ProyectoSopes", IN_CREATE | IN_MODIFY | IN_DELETE); 
+  wd = inotify_add_watch(fd, "/", IN_CREATE | IN_MODIFY | IN_DELETE); 
  
   if (wd == -1)
     {
-      printf("Couldn't add watch to %s\n","/home/n201503865/ProyectoSopes");
+      printf("Couldn't add watch to %s\n","/");
     }
   else
     {
-      printf("Watching:: %s\n","/home/n201503865/ProyectoSopes");
+      printf("Watching:: %s\n","/");
     }
  
   /* do it forever*/
