@@ -48,9 +48,6 @@ void escribirArchivo(char* parametro, char* parametro2){
             fprintf(fptr, "%s %s *Fecha: %s \n", parametro, parametro2,fecha);
         }
         fclose(fptr);
-
-     fclose(fptr);
-
 }
 
  
